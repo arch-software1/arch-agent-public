@@ -20,9 +20,54 @@ sudo apt-get install -y expect telnet snmp
 
 ---
 
-## Opção 1 — Docker Compose (recomendado)
+## Opção 1 — Binário direto no Linux (recomendado)
 
-Use esta opção se o servidor já tiver o Docker instalado.
+Use esta opção em servidores **Linux Debian 12 ou 13**.
+
+### 1. Baixar o agente
+
+```bash
+curl -Lo /usr/local/bin/arch-agent \
+  https://github.com/ArchOLT/agent/releases/latest/download/arch-agent-linux-x86_64
+
+chmod +x /usr/local/bin/arch-agent
+```
+
+### 2. Registrar o agente
+
+```bash
+arch-agent register
+```
+
+O agente exibe um banner com um **código** de registro. Para confirmar:
+
+1. Esteja **logado** em `https://app.archolt.com.br`
+2. Acesse `https://app.archolt.com.br/agents`
+3. Insira o **código** exibido no terminal
+
+Você tem **60 minutos** para inserir o código. Se expirar, execute `arch-agent register` novamente.
+
+Aguarde até ver a mensagem:
+
+```
+  ✓ Agente registrado com sucesso!
+```
+
+> O comando `arch-agent start` também inicia o registro automaticamente se o agente ainda não estiver registrado.
+
+### 3. Iniciar o agente
+
+```bash
+arch-agent start
+```
+
+O agente vai iniciar e conectar automaticamente aos servidores da ArchOLT.
+
+---
+
+## Opção 2 — Docker Compose
+
+Use esta opção se preferir usar Docker em vez do binário direto.
 
 ### 1. Instalar o Docker (se ainda não tiver)
 
@@ -31,8 +76,6 @@ curl -fsSL https://get.docker.com | sh
 ```
 
 ### 2. Criar o arquivo de configuração
-
-Crie uma pasta para o agente e salve o arquivo abaixo dentro dela:
 
 ```bash
 mkdir -p /opt/arch-agent
@@ -81,7 +124,7 @@ Na primeira execução, o agente exibe um banner como este:
 2. Acesse `https://app.archolt.com.br/agents`
 3. Insira o **código** exibido no banner
 
-O agente verifica a confirmação automaticamente a cada 5 segundos. Você tem **2 minutos** para inserir o código antes de expirar.
+O agente verifica a confirmação automaticamente a cada 5 segundos. Você tem **60 minutos** para inserir o código antes de expirar.
 
 Após a confirmação, você verá:
 
@@ -102,51 +145,6 @@ Para ver os logs a qualquer momento:
 ```bash
 docker compose logs -f
 ```
-
----
-
-## Opção 2 — Binário direto (sem Docker)
-
-Use esta opção se preferir não usar Docker.
-
-### 1. Baixar o agente
-
-```bash
-curl -Lo /usr/local/bin/arch-agent \
-  https://github.com/ArchOLT/agent/releases/latest/download/arch-agent-linux-x86_64
-
-chmod +x /usr/local/bin/arch-agent
-```
-
-### 2. Registrar o agente
-
-```bash
-arch-agent register
-```
-
-O agente exibe um banner com um **código** de registro. Para confirmar:
-
-1. Esteja **logado** em `https://app.archolt.com.br`
-2. Acesse `https://app.archolt.com.br/agents`
-3. Insira o **código** exibido no terminal
-
-Você tem **2 minutos** para inserir o código. Se expirar, execute `arch-agent register` novamente.
-
-Aguarde até ver a mensagem:
-
-```
-  ✓ Agente registrado com sucesso!
-```
-
-> O comando `arch-agent start` também inicia o registro automaticamente se o agente ainda não estiver registrado.
-
-### 3. Iniciar o agente
-
-```bash
-arch-agent start
-```
-
-O agente vai iniciar e conectar automaticamente aos servidores da ArchOLT.
 
 ---
 
