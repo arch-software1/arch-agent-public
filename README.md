@@ -87,7 +87,7 @@ Crie o arquivo `docker-compose.yml` com o seguinte conteúdo:
 ```yaml
 services:
   arch-agent:
-    image: ghcr.io/archolt/agent-agent:latest
+    image: ghcr.io/arch-software1/arch-agent:latest
     restart: unless-stopped
     volumes:
       - agent-data:/data/arch-agent
