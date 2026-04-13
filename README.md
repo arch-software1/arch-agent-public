@@ -27,8 +27,8 @@ Use esta opção em servidores **Linux Debian 12 ou 13**.
 ### 1. Baixar o agente
 
 ```bash
-curl -Lo /usr/local/bin/arch-agent \
-  https://github.com/ArchOLT/agent/releases/latest/download/arch-agent-linux-x86_64
+  curl -Lo /usr/local/bin/arch-agent \
+ https://github.com/arch-software1/arch-agent-public/releases/download/v0.1.24/arch-
 
 chmod +x /usr/local/bin/arch-agent
 ```
